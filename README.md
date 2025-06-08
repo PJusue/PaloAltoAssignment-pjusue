@@ -1,13 +1,13 @@
 
-# 🛡️ Palo Alto Web Infrastructure — Terraform on AWS
+#  Palo Alto Web Infrastructure — Terraform on AWS
 
 This repository defines a secure, production-grade AWS infrastructure for deploying a **stateless containerized web application** using **ECS Fargate**. The stack includes integrated monitoring, security controls, cost governance, and follows AWS best practices.
 
 ---
 
-## 📐 Architecture Overview
+##  Architecture Overview
 
-![Architecture Diagram](palo_alto_infra_architecture.png)
+![Architecture Diagram](images/palo_alto_infra_architecture.png)
 
 The infrastructure is composed of the following core components:
 
@@ -24,7 +24,7 @@ The infrastructure is composed of the following core components:
 ---
 
 
-## 📦 Module Structure
+##  Module Structure
 
 ```
 .
@@ -47,7 +47,7 @@ The infrastructure is composed of the following core components:
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Install Dependencies
 
@@ -67,7 +67,7 @@ terraform apply
 
 ---
 
-## 🔍 Monitoring & Alerts
+##  Monitoring & Alerts
 
 CloudWatch alarms are configured for:
 
@@ -78,8 +78,38 @@ CloudWatch alarms are configured for:
 These send notifications to an **SNS Topic**, which you can subscribe to via email or integrate with Slack, OpsGenie, etc.
 
 ---
+## Enable the SSL for LB
+⚠️ ACM Certificate and Route 53 Validation Note
+To enable HTTPS using ACM on the Application Load Balancer, you must complete the following steps:
 
-## 🔐 Security Overview
+Configure Route 53 to host the domain used in your ACM certificate (e.g., example.com).
+This is necessary for ACM to perform DNS-based validation of the certificate.
+
+Once your Route 53 zone is correctly set up and delegation is in place:
+
+Uncomment the ACM certificate validation block in:
+
+h
+Copy
+Edit
+resources/acm/main.tf
+This includes the aws_route53_record and aws_acm_certificate_validation resources used for automatic DNS validation.
+
+Enable the ALB listener on port 443 and associate it with the ACM certificate ARN.
+
+If the ACM certificate is not successfully validated:
+
+Terraform will fail when trying to create the ALB listener on port 443.
+
+You will get an error like:
+
+javascript
+Copy
+Edit
+Error: InvalidCertificate: The certificate ARN provided has not been validated.
+
+---
+##  Security Overview
 
 | Component        | Hardening Strategy |
 |------------------|---------------------|
@@ -91,7 +121,7 @@ These send notifications to an **SNS Topic**, which you can subscribe to via ema
 
 ---
 
-## 💰 Cost Control
+##  Cost Control
 
 The infrastructure includes:
 
@@ -103,7 +133,7 @@ All resources are tagged with `Environment`, `Project`, and `ManagedBy` to enabl
 
 ---
 
-## 🔐 GitHub Actions Setup
+##  GitHub Actions Setup
 
 This repository includes a GitHub Actions workflow to automatically validate and plan your Terraform infrastructure on every push or pull request to `main`.
 
