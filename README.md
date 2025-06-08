@@ -28,6 +28,9 @@ The infrastructure is composed of the following core components:
 
 ```
 .
+├── .github/
+    ├── workflows/
+        ├── terraform.yml
 ├── modules/
 │   ├── acm/
 │   ├── cloudwatch-alarms/
@@ -37,12 +40,11 @@ The infrastructure is composed of the following core components:
 │   ├── security-groups/
 │   ├── vpc/
 ├── infrastructure/
-│   └── test-env/
-│       ├── main.tf
-│       ├── variables.tf
-│       ├── outputs.tf
-│       └── backend.tf
-└── testing-diagram.py
+    └── test-env/
+        ├── main.tf
+        ├── variables.tf
+        ├── outputs.tf
+        └── backend.tf
 ```
 
 ---
