@@ -27,24 +27,41 @@ The infrastructure is composed of the following core components:
 ##  Module Structure
 
 ```
-.
 ├── .github/
-    ├── workflows/
-        ├── terraform.yml
-├── modules/
+│   └── workflows/
+│       └── terraform.yml                
+├── images/
+│   └── palo_alto_infra_architecture.png 
+├── infrastructure/
+│   └── test-env/                       
+│       ├── acm.tf
+│       ├── backend.tf
+│       ├── cloudwatch.tf
+│       ├── cost_reports.tf
+│       ├── ecs.tf
+│       ├── iam.tf
+│       ├── kms.tf
+│       ├── load_balancer.tf
+│       ├── providers.tf
+│       ├── security-group.tf
+│       ├── sns.tf
+│       ├── vpc.tf
+│       ├── waf.tf
+│
+├── modules/                             
 │   ├── acm/
 │   ├── cloudwatch-alarms/
+│   ├── costs/
 │   ├── ecs/
 │   ├── iam/
 │   ├── kms/
+│   ├── load-balancer/
+│   ├── route53/
+│   ├── s3/
 │   ├── security-groups/
+│   ├── sns/
 │   ├── vpc/
-├── infrastructure/
-    └── test-env/
-        ├── main.tf
-        ├── variables.tf
-        ├── outputs.tf
-        └── backend.tf
+│   └── waf/
 ```
 
 ---

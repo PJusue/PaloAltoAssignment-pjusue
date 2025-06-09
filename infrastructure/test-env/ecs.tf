@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 locals{
-  container_image="nginxdemos/hello"
+  container_image="nginxdemos/hello:0.4-plain-text"
 }
 module "ecs-cluster" {
   source = "../../modules/ecs/cluster"
